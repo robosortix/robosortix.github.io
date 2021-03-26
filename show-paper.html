@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>test</title> 
+</head>
+<body>
+    <div id = 'gallery'></div>
+    <script>
+        function createGallery(path){
+            var div = document.getElementById('gallery');
+            var counter = 1;
+            var img = document.createElement('img');
+            img.src = path + counter + '.jpg';
+            img.onload = function(){loadImg(counter);}
+            img.onerror = function(){ this.parentNode.removeChild(this); return false}
+            function loadImg(counter){
+                var pic = document.createElement('img');
+                pic.src = path + counter + '.jpg';
+                div.appendChild(pic);
+                img  = pic;
+                counter++;
+                img.onload = function(){
+                    loadImg(counter)
+                }
+                img.onerror = function(){ 
+                    this.parentNode.removeChild(this);
+                }
+            }
+        }
+        createGallery('img/paper/');  
+    </script>
+</body>
+</html>
